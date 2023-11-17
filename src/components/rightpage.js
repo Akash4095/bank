@@ -200,8 +200,8 @@ const Rightpage = () => {
                     <h4>Do u want to close account</h4>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button type="button" negative onClick={() => setCloseModal(false)}>close</Button>
-                    <Button type="button" positive onClick={() => setCloseModal(false)}>Submit</Button>
+                    <Button type="button" negative onClick={() => setCloseModal(false)}>No</Button>
+                    <Button type="button" positive onClick={() => setCloseModal(false)}>Yes</Button>
                 </Modal.Actions>
             </Modal>
         </div>
