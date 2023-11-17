@@ -1,5 +1,7 @@
-import React from 'react'
-import { Breadcrumb, Dropdown, Grid, Input, Menu, Table } from 'semantic-ui-react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Breadcrumb, Button, Dropdown, Grid, Input, Menu, Modal, Table } from 'semantic-ui-react'
+import AddForm from './addForm'
 
 const Rightpage = () => {
     const options = [
@@ -7,6 +9,21 @@ const Rightpage = () => {
         { key: 2, text: 'Month', value: 2 },
         { key: 3, text: 'Year', value: 3 },
     ]
+
+    const [addModal, setAddModal] = useState(false)
+    const [editModal, setEditModal] = useState(false)
+    const [closeModal, setCloseModal] = useState(false)
+
+    const addFormModal = () => {
+        setAddModal(true)
+    }
+
+    const editFormModal = () => {
+        setEditModal(true)
+    }
+    const closeAccountForm = () => {
+        setCloseModal(true)
+    }
 
     return (
         <div className='rightpage'>
@@ -30,9 +47,9 @@ const Rightpage = () => {
                 </div>
                 <div className='right-section'>
                     <div>
-                        <button className='transfer-btn'>Transfer/Close Account</button>
-                        <button className='edit-btn'>Edit</button>
-                        <button className='add-btn' >Add</button>
+                        <button className='transfer-btn' onClick={() => closeAccountForm()}>Transfer/Close Account</button>
+                        <button className='edit-btn' onClick={() => editFormModal()}>Edit</button>
+                        <button className='add-btn' onClick={() => addFormModal()} >Add</button>
                     </div>
                     <div>
                         <Grid columns="2" divided style={{ width: "26vw", marginTop: "15px" }}>
@@ -62,17 +79,27 @@ const Rightpage = () => {
                 </div>
             </div>
             <div className='bottom'>
-                <div>
+                <div className='breadcrumb'>
                     <Breadcrumb>
-                        <Breadcrumb.Section >Transactions</Breadcrumb.Section>
+                        <Link to='/transaction' >
+                            <Breadcrumb.Section > Transactions </Breadcrumb.Section>
+                        </Link>
                         <Breadcrumb.Divider>|</Breadcrumb.Divider>
-                        <Breadcrumb.Section >Bank Statements</Breadcrumb.Section>
+                        <Link to='/statement' >
+                            <Breadcrumb.Section >Bank Statements</Breadcrumb.Section>
+                        </Link>
                         <Breadcrumb.Divider>|</Breadcrumb.Divider>
-                        <Breadcrumb.Section>Intrest and Charges</Breadcrumb.Section>
+                        <Link to='/intrest' >
+                            <Breadcrumb.Section>Intrest and Charges</Breadcrumb.Section>
+                        </Link>
                         <Breadcrumb.Divider>|</Breadcrumb.Divider>
-                        <Breadcrumb.Section >Todo</Breadcrumb.Section>
+                        <Link to='/todo' >
+                            <Breadcrumb.Section >Todo</Breadcrumb.Section>
+                        </Link>
                         <Breadcrumb.Divider>|</Breadcrumb.Divider>
-                        <Breadcrumb.Section >Journals</Breadcrumb.Section>
+                        <Link to='/journals' >
+                            <Breadcrumb.Section >Journals</Breadcrumb.Section>
+                        </Link>
                     </Breadcrumb>
                 </div>
                 <Menu style={{ width: "400px" }}>
@@ -147,6 +174,36 @@ const Rightpage = () => {
                     </Table>
                 </div>
             </div>
+            <Modal open={addModal} size="tiny">
+                <Modal.Header>Add Form</Modal.Header>
+                <Modal.Content>
+                    <AddForm />
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button type="button" negative onClick={() => setAddModal(false)}>close</Button>
+                    <Button type="button" positive onClick={() => setAddModal(false)}>Submit</Button>
+                </Modal.Actions>
+            </Modal>
+            <Modal open={editModal} size="tiny">
+                <Modal.Header>Edit Form</Modal.Header>
+                <Modal.Content>
+                    <AddForm />
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button type="button" negative onClick={() => setEditModal(false)}>close</Button>
+                    <Button type="button" positive onClick={() => setEditModal(false)}>Submit</Button>
+                </Modal.Actions>
+            </Modal>
+            <Modal open={closeModal} size="tiny">
+                <Modal.Header>Close Account</Modal.Header>
+                <Modal.Content>
+                    <h4>Do u want to close account</h4>
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button type="button" negative onClick={() => setCloseModal(false)}>close</Button>
+                    <Button type="button" positive onClick={() => setCloseModal(false)}>Submit</Button>
+                </Modal.Actions>
+            </Modal>
         </div>
     )
 }

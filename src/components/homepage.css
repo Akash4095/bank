@@ -117,3 +117,8 @@ h2 {
 .font13{
   font-size: 13px;
 }
+
+.breadcrumb{
+  font-size: 14px !important;
+  cursor: pointer;
+}
